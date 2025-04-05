@@ -34,16 +34,16 @@ def calculo_mejor_jugador(resultados):
      """Recibo los puntos de los jugadores y obtengo cual es el mejor"""
      mejor_jugador = ""
      mejor_puntaje = -1
-     for resultado, datos in resultados.items():
+     for jugador, datos in resultados.items():
           if datos["Puntos"] > mejor_puntaje:
                mejor_puntaje = datos["Puntos"]
-               mejor_jugador = resultado
+               mejor_jugador = jugador
      return mejor_jugador  
 
 
 def imprimo_resultados(resultados):
      """Imprimo los resultados en forma de tabla"""
-     print('Ranking ronda: ')
+     print('Ranking rondalina: ')
      print(f"{'Jugador':<10}{'Kills':<7}{'Asistencias':<7}{'Muertes':<7}{'MVPs':<7}{'Puntos':<7}")
      print("-" * 22)
 
@@ -70,19 +70,20 @@ def calculo_partidas(rounds):
             resultados[jugador] = nuevo_dato
         mejor = calculo_mejor_jugador(resultados)
         if mejor in resultados:
-             nuevo_dato["MVPs"] += 1 
-    
-        imprimo_resultados(resultados)
+             resultados[mejor]["MVPs"] += 1 
 
         result_final = {}
         for jugador, datos in resultados.items():
             nuevo_dato = datos.copy()
-            nuevo_dato["kills"] += (datos["kills"])
-            nuevo_dato["assists"] += (datos["assists"])
-            nuevo_dato["deaths"] += (datos["deaths"])
-            nuevo_dato["Puntos"] += (datos["Puntos"]) 
-            nuevo_dato["MVPs"] += (datos["MVPs"])
+            nuevo_dato["kills"] += datos["kills"]
+            nuevo_dato["assists"] += datos["assists"]
+            nuevo_dato["deaths"] += datos["deaths"]
+            nuevo_dato["Puntos"] += datos["Puntos"] 
+            nuevo_dato["MVPs"] += datos["MVPs"]
             result_final[jugador] = nuevo_dato
+            
+        imprimo_resultados(resultados)
+    
     print('Ranking final:')
     imprimo_resultados(result_final)
     
