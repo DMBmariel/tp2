@@ -49,9 +49,7 @@ def imprimo_resultados(resultados):
 
      for jugador, datos in sorted(resultados.items(), key=lambda x: x[1]["Puntos"], reverse=True):
           print(f"{jugador:<10} {datos['kills']:<10} {datos['assists']:<10} {datos['deaths']:<10}{datos['MVPs']:<10}{datos['Puntos']:<10}")
-
-     """for resultado, datos in resultados.items():
-          print(f"{resultado:<10}{datos['kills']:<10}{datos['assists']:<10}{datos['deaths']:<10}{datos['MVPs']:<10}{datos['Puntos']:<10}") """        
+    
      print("-" * 52)
      print()
           
@@ -95,6 +93,7 @@ def calculo_partidas(rounds):
              resultados[mejor]["MVPs"] += 1 
         print(f'Ranking ronda: {i}')     
         imprimo_resultados(resultados)
+        # envio los datos de cada partida para acumular en resultado_final
         calculo_final(resultados, result_final)
         i += 1
        
